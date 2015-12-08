@@ -1,2 +1,3 @@
 # web-chat-app
-A simple web chat app using Socket.IO
+
+A simple web chat app using WebSockets
