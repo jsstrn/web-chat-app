@@ -20,7 +20,7 @@ $('form').submit(function () {
   var timestamp = new Date()
   var msg = {
     username: username,
-    msg: $('#msg').val(),
+    message: $('#msg').val(),
     timestamp: timestamp.toISOString()
   }
   socket.emit('chat message', msg);
