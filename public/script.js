@@ -11,16 +11,18 @@ document.querySelector('#username').textContent = username
 
 function getElapsedTime (timestamp) {
   var ms = Date.now() - timestamp.getTime()
-  var min = Math.round(ms/60000)
+  var min = ms/60000
   var time = ''
   if (min > 1439) {
     time = `${Math.round(min/1440)}d`
   } else if (min > 59) {
     time = `${Math.round(min/60)}h`
+  } else if (min >= 1) {
+    time = `${Math.round(min)}m`
   } else if (min > 0) {
-    time = `${min}m`
-  } else {
-    time = `just now`
+    var sec = Math.round(min*60)
+    if (sec === 0) time = 'just now'
+    else time = `${sec}s`
   }
   return time
 }

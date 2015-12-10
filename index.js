@@ -5,8 +5,8 @@ const io = require('socket.io')(http)
 const mongoose = require('mongoose')
 
 // database connection
-const db_user = 'user' // process.env.CHAT_DB_USER
-const db_pwd = 'password' // process.env.CHAT_DB_PWD
+const db_user = process.env.CHAT_DB_USER || 'user'
+const db_pwd = process.env.CHAT_DB_PWD || 'password'
 const db_url =  'mongodb://' + db_user + ':' + db_pwd + '@ds027835.mongolab.com:27835/webchat'
 mongoose.connect(db_url)
 const db = mongoose.connection
@@ -48,5 +48,3 @@ const PORT = process.env.PORT || 3000
 http.listen(PORT, () => {
   console.log(`Listening to http://localhost:${PORT}`)
 })
-
-module.exports = app
