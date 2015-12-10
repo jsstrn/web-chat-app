@@ -6,13 +6,45 @@ if (!username) {
   username = 'user' + ran
 }
 
-function addMessage(message) {
-  var messages = document.getElementById('messages')
+function getElapsedTime (timestamp) {
+  var diff = Date.now() - timestamp.getTime()
+  var minutes = Math.round(diff / 60000)
+  var time
+  if (minutes === 0) {
+    time = 'a moment ago'
+  } else {
+    time = minutes + 'min ago'
+  }
+  return time
+}
+
+function addMessageSegment (message) {
+  var chat = document.querySelector('.chat')
+  var section = document.createElement('section')
+  // var pUser = document.createElement('p')
+  // var pMsg = document.createElement('p')
+  // var pTime = document.createElement('p')
+
+  var timestamp = new Date(message.timestamp)
+  var time = getElapsedTime(timestamp)
+
+  section.innerHTML = ```
+  <p>${message.username}</p>
+  <p class="msg">${message.message}</p>
+  <p>${time}</p>
+  ```
+  chat.appendChild(section)
+}
+
+function addMessage (message) {
+  var messages = document.querySelector('#messages')
+  // var messages = document.getElementById('messages')
   var li = document.createElement('li')
 
   var timestamp = new Date(message.timestamp)
-  var time = timestamp.toLocaleTimeString()
-  li.textContent = `${message.username} at ${time}: ${message.message}`
+  var time = getElapsedTime(timestamp)
+
+  li.textContent = `${message.username} ${time}: ${message.message}`
   messages.appendChild(li)
 }
 
@@ -28,8 +60,8 @@ $('form').submit(function () {
   return false;
 });
 
-socket.on('chat message', addMessage)
+socket.on('chat message', addMessageSegment)
 
 socket.on('chat log', function (messages) {
-  messages.forEach(addMessage)
+  messages.forEach(addMessageSegment)
 })
