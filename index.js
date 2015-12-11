@@ -38,7 +38,11 @@ io.on('connection', (socket) => {
     // send message to all clients
     io.emit('chat message', msg)
   })
-
+  socket.on('typing', input => {
+    io.emit('typing', input)
+    console.log(input)
+  })
+  // socket.on('isTyping', input {})
   socket.on('disconnect', () => {
     console.log('User disconnected.')
   })
