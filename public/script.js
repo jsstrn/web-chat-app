@@ -113,7 +113,7 @@ $('#msg').keypress(function (e) {
       clearTimeout(timeout)
       timeout = setTimeout(timeoutFunction, 5000)
     } else {
-          }
+    }
   } })
 
 function removeTypingAlert () {
@@ -121,12 +121,11 @@ function removeTypingAlert () {
   console.log('removed something')
   var pageHeader = document.querySelector('#pageHeader')
   pageHeader.textContent = 'Web Chat 1.0'
-
 }
 
 socket.on('typing', data => {
   if (data.isTyping) {
-      addTypingNotification(data.username)
-      console.log("UL added")
-    } else { removeTypingAlert()}
-  } )
+    addTypingNotification(data.username)
+    console.log('UL added')
+  } else { removeTypingAlert() }
+})
