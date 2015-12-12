@@ -1,0 +1,17 @@
+{
+  "name": "letsallchat",
+  "description": "A simple web chat app built with Socket.io",
+  "scripts": {
+  },
+  "env": {
+    "CHAT_DB_PWD": {
+      "required": true
+    },
+    "CHAT_DB_USER": {
+      "required": true
+    }
+  },
+  "addons": [
+
+  ]
+}
