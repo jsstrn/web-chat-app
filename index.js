@@ -38,7 +38,6 @@ io.on('connection', (socket) => {
     message.save(err => {
       if (err) return console.error(err)
     })
-    console.log(`Message: ${msg.message}`)
     // send message to all clients
     io.emit('chat message', msg)
   })

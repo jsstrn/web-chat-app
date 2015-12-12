@@ -28,7 +28,6 @@ function getElapsedTime (timestamp) {
 }
 
 function addMessageToList (message) {
-  console.log(message.message)
   var chat = document.querySelector('.chat')
   var section = document.createElement('section')
 
@@ -45,7 +44,6 @@ function addMessageToList (message) {
 }
 
 function sendMessageToServer (event) {
-  console.log(event)
   if (event.type === 'keydown' && event.keyCode !== 13) return
   if (msg.value === '') return
   var timestamp = new Date()
