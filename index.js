@@ -22,11 +22,14 @@ app.use(express.static('public'))
 io.on('connection', (socket) => {
   console.log('A user connected.')
   // send chat log on new user connection
-  Message.model('Message').find((err, messages) => {
-    if (err) return console.error(err)
-    // io.emit('chat log', messages)
-    socket.emit('chat log', messages)
-  })
+  Message.model('Message')
+    .find()
+    .sort({date: -1})
+    .limit(5)
+    .exec((err, messages) => {
+      if (err) return console.error(err)
+      socket.emit('chat log', messages)
+    })
 
   socket.on('chat message', msg => {
     // save message to database
