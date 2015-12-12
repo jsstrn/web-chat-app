@@ -3,6 +3,7 @@ const app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
 const mongoose = require('mongoose')
+const md = require('markdown').markdown
 
 // database connection
 const db_user = process.env.CHAT_DB_USER || 'user'
@@ -24,14 +25,14 @@ io.on('connection', (socket) => {
   // send chat log on new user connection
   Message.model('Message')
     .find()
-    .sort({date: -1})
-    .limit(5)
     .exec((err, messages) => {
       if (err) return console.error(err)
       socket.emit('chat log', messages)
     })
 
   socket.on('chat message', msg => {
+    // parse markdown
+    msg.message = md.toHTML(msg.message)
     // save message to database
     const message = new Message(msg)
     message.save(err => {
