@@ -28,6 +28,7 @@ function getElapsedTime (timestamp) {
 }
 
 function addMessageToList (message) {
+  console.log(message.message)
   var chat = document.querySelector('.chat')
   var section = document.createElement('section')
 
@@ -36,17 +37,12 @@ function addMessageToList (message) {
 
   section.innerHTML = `
   <p>${message.username}</p>
-  <p>${message.message}</p>
-  <p>${time}</p>`
+  <div>${message.message}</div>
+  <p class="timestamp">${time}</p>`
 
   chat.appendChild(section)
   section.scrollIntoView()
 }
-
-// function checkMessage () {
-//   if (event.keyCode !== 13) return
-//   if (event.)
-// }
 
 function sendMessageToServer (event) {
   console.log(event)
@@ -69,6 +65,6 @@ msg.addEventListener('keydown', sendMessageToServer, false)
 
 socket.on('chat message', addMessageToList)
 
-socket.on('chat log', function (messages) {
+socket.on('chat log', (messages) => {
   messages.forEach(addMessageToList)
 })
