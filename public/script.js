@@ -1,5 +1,6 @@
 /* global $ Auth0Lock */
 // Updated Dec 11
+
 document.querySelector('#login').addEventListener('click', function () {
   var lock = new Auth0Lock('TtKbfNdcsTGsFcFu0aqxxpeCAEML0RRg', 'belgian-chocolates.auth0.com')
   lock.show(function (err, profile, token) {
